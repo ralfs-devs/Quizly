@@ -11,11 +11,20 @@ class ManageTokenCookies:
 
         if "access" in data:
             response.set_cookie(
-                "access_token", data["access"], httponly=True, samesite="Lax")
+                "access_token",
+                data["access"],
+                httponly=True,
+                samesite="Lax",
+                path="/"
+            )
         if "refresh" in data:
             response.set_cookie(
-                "refresh_token", data["refresh"], httponly=True, samesite="Lax")
-
+                "refresh_token",
+                data["refresh"],
+                httponly=True,
+                samesite="Lax",
+                path="/"
+            )
         if user:
             response.data["user"] = user
 
