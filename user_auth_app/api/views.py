@@ -3,9 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-# from rest_framework_simplejwt.serializers import TokenRefreshSerializer
-from user_auth_app.serializers import RegistrationSerializer
-from user_auth_app.authentication import BearerAuthentication
+from user_auth_app.api.serializers import RegistrationSerializer
 from user_auth_app.utils import ManageTokenCookies
 
 
@@ -40,7 +38,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
 
         return ManageTokenCookies.create_response(
             response.data,
-            "Login successful",
+            "Login successfull",
             user=user_info
         )
 
@@ -64,7 +62,6 @@ class CookieTokenRefreshView(TokenRefreshView):
 class CookieLogoutView(APIView):
     """Handles user logout by deleting authentication cookies."""
 
-    authentication_classes = [BearerAuthentication]
     permission_classes = [IsAuthenticated]
 
     def post(self, request):

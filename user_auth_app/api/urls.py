@@ -1,6 +1,6 @@
 
 from django.urls import path
-from user_auth_app.views import (
+from user_auth_app.api.views import (
     RegistrationView,
     CookieTokenObtainPairView,
     CookieLogoutView,

@@ -32,6 +32,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
+# GEMINI MODEL
+GEMINI_MODEL = "gemini-3.5-flash"
+# GEMINI_API_KEY
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -48,9 +52,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'yt_dlp',
+    'whisper',
     'rest_framework_simplejwt',
     'user_auth_app',
     'quiz_management_app',
+
 ]
 
 MIDDLEWARE = [
