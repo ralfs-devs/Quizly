@@ -25,7 +25,6 @@ class CookieTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
 
-        # Den User aus der Validierung des Serializers extrahieren
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid()
         user = serializer.user

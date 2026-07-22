@@ -3,6 +3,8 @@ from quiz_management_app.models import Quiz, Question
 
 
 class QuestionSerializer(serializers.ModelSerializer):
+    """Serializer for the Question model."""
+
     class Meta:
         model = Question
         fields = [
@@ -16,6 +18,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class QuizSerializer(serializers.ModelSerializer):
+    """Serializer for the Quiz model including nested questions and URL mapping."""
+
     questions = QuestionSerializer(many=True, read_only=True)
     url = serializers.URLField(
         source="video_url", write_only=True, required=False)
@@ -34,8 +38,6 @@ class QuizSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "id",
-            "title",
-            "description",
             "created_at",
             "updated_at",
             "video_url",
@@ -44,6 +46,7 @@ class QuizSerializer(serializers.ModelSerializer):
         extra_kwargs = {"video_url": {"required": False}}
 
     def validate(self, attrs):
+        """Validates incoming attributes to ensure a video URL is provided on creation."""
         if self.context["request"].method == "POST":
             url = attrs.get("video_url") or self.initial_data.get("url")
             if not url:

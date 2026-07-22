@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 # GEMINI MODEL
-GEMINI_MODEL = "gemini-3.5-flash"
+GEMINI_MODEL = "gemini-3.5-flash-lite"
 # GEMINI_API_KEY
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'user_auth_app',
     'quiz_management_app',
-
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +127,8 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost: 5500",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -149,13 +150,13 @@ USE_TZ = True
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'user_auth_app.utils.JWTCookieAuthentication',
     )
 }
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(hours=8),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
