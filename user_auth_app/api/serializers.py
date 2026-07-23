@@ -5,17 +5,17 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class RegistrationSerializer(serializers.ModelSerializer):
     """Serializer for user registration."""
-    repeated_password = serializers.CharField(write_only=True)
+    confirmed_password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'repeated_password']
+        fields = ['username', 'email', 'password', 'confirmed_password']
         extra_kwargs = {
             'password': {'write_only': True},
             'email': {'required': True}
         }
 
-    def validate_repeated_password(self, value):
+    def validate_confirmed_password(self, value):
         """Checks if passwords match."""
         password = self.initial_data.get('password')
         if password and value and password != value:
