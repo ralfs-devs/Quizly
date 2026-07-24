@@ -24,6 +24,9 @@ class Quiz(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = "Quizzes"
+
     def __str__(self):
         """Returns the string representation of the quiz."""
         return f"{self.title} (Owner: {self.owner.username})"
